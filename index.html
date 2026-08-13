@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>5C班｜线上班级学习平台</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#040914;
+    --bg2:#071426;
+    --card:rgba(10,23,45,.78);
+
+    --cyan:#00eaff;
+    --blue:#249cff;
+    --purple:#8c5cff;
+    --pink:#ff4bd8;
+    --green:#48ffb0;
+    --yellow:#ffd84d;
+
+    --text:#f4f9ff;
+    --muted:#8fa5c0;
+
+    --border:rgba(0,234,255,.18);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+
+    font-family:
+        "Segoe UI",
+        "Microsoft YaHei",
+        Arial,
+        sans-serif;
+
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(0,234,255,.12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(140,92,255,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(36,156,255,.08),
+            transparent 35%
+        ),
+        var(--bg);
+
+    overflow-x:hidden;
+}
+
+/* =========================
+   科技网格背景
+========================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(0,234,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,234,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:45px 45px;
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+/* =========================
+   顶部科技线
+========================= */
+
+.top-line{
+    height:4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--blue),
+            var(--purple),
+            var(--pink),
+            var(--cyan)
+        );
+
+    background-size:300% 100%;
+
+    animation:lineMove 8s linear infinite;
+}
+
+@keyframes lineMove{
+
+    0%{
+        background-position:0%;
+    }
+
+    100%{
+        background-position:300%;
+    }
+}
+
+
+/* =========================
+   主容器
+========================= */
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    padding:50px 0 38px;
+    text-align:center;
+}
+
+.school{
+    color:var(--cyan);
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    margin-bottom:14px;
+}
+
+.title{
+    font-size:clamp(48px,8vw,82px);
+
+    line-height:1;
+
+    font-weight:900;
+
+    letter-spacing:-3px;
+
+    margin-bottom:18px;
+}
+
+.title .five{
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--blue)
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+.title .c{
+    color:white;
+}
+
+.subtitle{
+    color:var(--muted);
+
+    font-size:16px;
+
+    line-height:1.8;
+}
+
+.subtitle strong{
+    color:#dcecff;
+}
+
+.system-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:20px;
+
+    padding:8px 16px;
+
+    border-radius:50px;
+
+    background:rgba(0,234,255,.04);
+
+    border:1px solid var(--border);
+
+    color:#82f8ff;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+}
+
+.status-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px var(--green);
+
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    50%{
+        opacity:.3;
+        transform:scale(.65);
+    }
+
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    margin-bottom:42px;
+}
+
+.section-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:18px;
+}
+
+.section-icon{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(0,234,255,.06);
+
+    border:
+        1px solid rgba(0,234,255,.16);
+
+    font-size:20px;
+}
+
+.section-title{
+
+    font-size:20px;
+
+    font-weight:800;
+}
+
+.section-title span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    font-weight:400;
+
+    margin-top:4px;
+}
+
+
+/* =========================
+   LEADERBOARD
+========================= */
+
+.leaderboard{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    padding:30px;
+
+    min-height:165px;
+
+    text-decoration:none;
+
+    color:white;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,234,255,.10),
+            rgba(36,156,255,.05),
+            rgba(140,92,255,.10)
+        );
+
+    border:
+        1px solid rgba(0,234,255,.28);
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.leaderboard::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    right:-150px;
+    top:-150px;
+
+    background:var(--cyan);
+
+    filter:blur(100px);
+
+    opacity:.07;
+}
+
+.leaderboard:hover{
+
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(0,234,255,.65);
+
+    box-shadow:
+        0 20px 60px rgba(0,180,255,.13);
+}
+
+.leader-icon{
+
+    width:82px;
+    height:82px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,234,255,.10),
+            rgba(140,92,255,.15)
+        );
+
+    border:
+        1px solid rgba(0,234,255,.25);
+
+    font-size:42px;
+}
+
+.leader-info{
+    flex:1;
+}
+
+.label{
+
+    color:var(--cyan);
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:7px;
+}
+
+.leader-title{
+
+    font-size:26px;
+
+    font-weight:900;
+
+    margin-bottom:7px;
+}
+
+.description{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+.enter{
+
+    padding:11px 17px;
+
+    border-radius:50px;
+
+    color:var(--cyan);
+
+    background:rgba(0,234,255,.06);
+
+    border:
+        1px solid rgba(0,234,255,.2);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+
+/* =========================
+   CARD GRID
+========================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+}
+
+.card{
+
+    position:relative;
+
+    min-height:190px;
+
+    padding:23px;
+
+    border-radius:20px;
+
+    background:var(--card);
+
+    border:
+        1px solid var(--border);
+
+    text-decoration:none;
+
+    color:white;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(12px);
+
+    transition:.25s;
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    background:
+        rgba(14,32,60,.95);
+
+    border-color:
+        rgba(0,234,255,.45);
+
+    box-shadow:
+        0 16px 45px rgba(0,0,0,.25);
+}
+
+.card-number{
+
+    position:absolute;
+
+    top:12px;
+    right:15px;
+
+    color:rgba(255,255,255,.12);
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+.card-icon{
+
+    width:52px;
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(0,234,255,.06);
+
+    border:
+        1px solid rgba(0,234,255,.13);
+
+    font-size:27px;
+
+    margin-bottom:17px;
+}
+
+.card-title{
+
+    font-size:16px;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+}
+
+.card-en{
+
+    color:var(--cyan);
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    margin-bottom:10px;
+}
+
+.card-desc{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.arrow{
+
+    position:absolute;
+
+    right:19px;
+    bottom:17px;
+
+    color:rgba(255,255,255,.3);
+
+    transition:.25s;
+}
+
+.card:hover .arrow{
+
+    color:var(--cyan);
+
+    transform:translateX(5px);
+}
+
+
+/* =========================
+   COMING SOON
+========================= */
+
+.card.disabled{
+
+    cursor:default;
+
+    opacity:.62;
+}
+
+.card.disabled:hover{
+
+    transform:none;
+
+    background:var(--card);
+
+    border-color:var(--border);
+
+    box-shadow:none;
+}
+
+.coming{
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    padding:4px 8px;
+
+    border-radius:20px;
+
+    font-size:8px;
+
+    color:#73859c;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.03);
+}
+
+
+/* =========================
+   DUEL
+========================= */
+
+.duel-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+}
+
+.duel{
+
+    position:relative;
+
+    min-height:175px;
+
+    padding:22px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(140,92,255,.08),
+            rgba(255,75,216,.04)
+        );
+
+    border:
+        1px solid rgba(140,92,255,.20);
+
+    text-decoration:none;
+
+    color:white;
+
+    transition:.25s;
+}
+
+.duel:hover{
+
+    transform:translateY(-6px);
+
+    border-color:
+        rgba(180,120,255,.6);
+
+    box-shadow:
+        0 16px 45px rgba(140,92,255,.10);
+}
+
+.duel-icon{
+
+    width:50px;
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+        rgba(140,92,255,.10);
+
+    border:
+        1px solid rgba(140,92,255,.20);
+
+    font-size:25px;
+
+    margin-bottom:16px;
+}
+
+.duel-title{
+
+    font-size:15px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
+}
+
+.duel-en{
+
+    color:#bca8ff;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    margin-bottom:9px;
+}
+
+.duel-desc{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.6;
+}
+
+.duel-arrow{
+
+    position:absolute;
+
+    right:17px;
+    bottom:16px;
+
+    color:rgba(255,255,255,.3);
+}
+
+
+/* =========================
+   CHALLENGE
+========================= */
+
+.challenge{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:27px 30px;
+
+    border-radius:23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,216,77,.06),
+            rgba(255,75,216,.06),
+            rgba(140,92,255,.08)
+        );
+
+    border:
+        1px solid rgba(255,216,77,.18);
+
+    text-decoration:none;
+
+    color:white;
+
+    transition:.25s;
+
+    overflow:hidden;
+}
+
+.challenge:hover{
+
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(255,216,77,.5);
+
+    box-shadow:
+        0 18px 55px rgba(255,216,77,.07);
+}
+
+.challenge-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.challenge-icon{
+
+    width:70px;
+    height:70px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,216,77,.08);
+
+    border:
+        1px solid rgba(255,216,77,.20);
+
+    font-size:34px;
+}
+
+.challenge-title{
+
+    font-size:23px;
+
+    font-weight:900;
+
+    margin-bottom:6px;
+}
+
+.challenge-desc{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+.challenge-button{
+
+    padding:11px 18px;
+
+    border-radius:50px;
+
+    color:#ffe88a;
+
+    background:
+        rgba(255,216,77,.06);
+
+    border:
+        1px solid rgba(255,216,77,.20);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    margin-top:45px;
+
+    padding:
+        25px 0 35px;
+
+    text-align:center;
+
+    border-top:
+        1px solid rgba(255,255,255,.05);
+
+    color:#5d718b;
+
+    font-size:10px;
+
+    line-height:1.8;
+}
+
+.footer-title{
+
+    color:rgba(0,234,255,.45);
+
+    letter-spacing:2px;
+
+    margin-bottom:5px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:950px){
+
+    .grid,
+    .duel-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    header{
+
+        padding-top:35px;
+    }
+
+    .title{
+
+        font-size:55px;
+    }
+
+    .leaderboard{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        padding:25px;
+    }
+
+    .leader-icon{
+
+        width:70px;
+        height:70px;
+
+        font-size:35px;
+    }
+
+    .enter{
+
+        margin-top:3px;
+    }
+
+    .grid,
+    .duel-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .challenge{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="top-line"></div>
+
+
+<div class="container">
+
+
+<!-- ===================================
+     HEADER
+=================================== -->
+
+<header>
+
+    <div class="school">
+        班达马兰国民型华小B校
+    </div>
+
+    <div class="title">
+        <span class="five">5</span><span class="c">C</span>
+    </div>
+
+    <div class="subtitle">
+
+        <strong>线上班级学习平台</strong>
+
+        <br>
+
+        CLASS DIGITAL LEARNING HUB
+
+    </div>
+
+    <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        ONLINE LEARNING PLATFORM
+
+    </div>
+
+</header>
+
+
+
+<!-- ===================================
+     LEADERBOARD
+=================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-icon">
+            🏆
+        </div>
+
+        <div class="section-title">
+
+            班级排行榜
+
+            <span>
+                CLASS LEADERBOARD
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <a
+        class="leaderboard"
+        href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbwggEC6rVHlIsWgkyO3qQUso--SXu3jDtpJDqB6Cl16camkmrHI36ZTAKq7i9p57oR5/exec"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        <div class="leader-icon">
+            🏆
+        </div>
+
+        <div class="leader-info">
+
+            <div class="label">
+                5C CLASS
+            </div>
+
+            <div class="leader-title">
+                5C班 Leaderboard
+            </div>
+
+            <div class="description">
+
+                查看班级学习积分、排名及学习表现。
+
+                <br>
+
+                每一次学习，都让自己更进一步。
+
+            </div>
+
+        </div>
+
+        <div class="enter">
+            进入排行榜 →
+        </div>
+
+    </a>
+
+</section>
+
+
+
+<!-- ===================================
+     ONLINE PRACTICE
+=================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-icon">
+            📚
+        </div>
+
+        <div class="section-title">
+
+            线上练习
+
+            <span>
+                ONLINE PRACTICE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <!-- 华文 -->
+
+        <a
+            class="card"
+            href="https://script.google.com/macros/s/AKfycbzSS78I2czSG3ls5-zE5PDX7aV9UdlgsTzYr9fKY_II36L19o6ZXfQXSwr2o0e6tR6UWw/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="card-number">
+                01
+            </div>
+
+            <div class="card-icon">
+                🀄
+            </div>
+
+            <div class="card-title">
+                五年级华文线上练习
+            </div>
+
+            <div class="card-en">
+                CHINESE
+            </div>
+
+            <div class="card-desc">
+                华文课堂练习、语文知识、
+                阅读及词语训练。
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </a>
+
+
+
+        <!-- 历史 -->
+
+        <a
+            class="card"
+            href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbxKX3B9eApfaWJ4WHXnz40KqX8F38iaT6iASUvDLd2AaDzwiZCRfnrsYXIpJUFdl5kKTA/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="card-number">
+                02
+            </div>
+
+            <div class="card-icon">
+                🏛️
+            </div>
+
+            <div class="card-title">
+                五年级历史线上练习
+            </div>
+
+            <div class="card-en">
+                HISTORY
+            </div>
+
+            <div class="card-desc">
+                历史人物、事件、
+                知识与时序练习。
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </a>
+
+
+
+        <!-- 科学 -->
+
+        <div class="card disabled">
+
+            <div class="coming">
+                COMING SOON
+            </div>
+
+            <div class="card-number">
+                03
+            </div>
+
+            <div class="card-icon">
+                🧬
+            </div>
+
+            <div class="card-title">
+                五年级科学线上练习
+            </div>
+
+            <div class="card-en">
+                SCIENCE
+            </div>
+
+            <div class="card-desc">
+                科学知识、实验、
+                探究与思维训练。
+            </div>
+
+        </div>
+
+
+
+        <!-- 数学 -->
+
+        <div class="card disabled">
+
+            <div class="coming">
+                COMING SOON
+            </div>
+
+            <div class="card-number">
+                04
+            </div>
+
+            <div class="card-icon">
+                ∑
+            </div>
+
+            <div class="card-title">
+                五年级数学线上练习
+            </div>
+
+            <div class="card-en">
+                MATHEMATICS
+            </div>
+
+            <div class="card-desc">
+                数学计算、应用题、
+                思维训练与挑战。
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===================================
+     1 VS 1 DUEL
+=================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-icon">
+            ⚔️
+        </div>
+
+        <div class="section-title">
+
+            双人比拼
+
+            <span>
+                1 VS 1 CHALLENGE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="duel-grid">
+
+
+        <!-- 华文 -->
+
+        <a
+            class="duel"
+            href="https://script.google.com/macros/s/AKfycbzl6a6Dy7SVr9gbQ65Sz0av65YD8QrIT-hHqjFg_HZuOKu0tG2Uprx_s6NSWq1Qb31_LQ/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="duel-icon">
+                🀄
+            </div>
+
+            <div class="duel-title">
+                五年级华文双人比拼
+            </div>
+
+            <div class="duel-en">
+                CHINESE DUEL
+            </div>
+
+            <div class="duel-desc">
+                与同学进行华文知识
+                1 VS 1 对战。
+            </div>
+
+            <div class="duel-arrow">
+                →
+            </div>
+
+        </a>
+
+
+
+        <!-- 历史 -->
+
+        <a
+            class="duel"
+            href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbxu535xogQHPj1z_ZgIK0ANLr3SkR2IoCRP7ILfwE_SYoHarYEQq7ND_HS98ZBcZbBm/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="duel-icon">
+                🏛️
+            </div>
+
+            <div class="duel-title">
+                五年级历史双人比拼
+            </div>
+
+            <div class="duel-en">
+                HISTORY DUEL
+            </div>
+
+            <div class="duel-desc">
+                与同学进行历史知识
+                1 VS 1 对战。
+            </div>
+
+            <div class="duel-arrow">
+                →
+            </div>
+
+        </a>
+
+
+
+        <!-- 科学 -->
+
+        <a
+            class="duel"
+            href="https://script.google.com/macros/s/AKfycbxQhfQ_UW-xpqc_-2dRHvYUfd6gLOov1SeXhkH4F_vOKOyGj_UUfo28XpHxHGRwnabYlQ/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="duel-icon">
+                🧬
+            </div>
+
+            <div class="duel-title">
+                五年级科学双人比拼
+            </div>
+
+            <div class="duel-en">
+                SCIENCE DUEL
+            </div>
+
+            <div class="duel-desc">
+                与同学进行科学知识
+                1 VS 1 对战。
+            </div>
+
+            <div class="duel-arrow">
+                →
+            </div>
+
+        </a>
+
+
+
+        <!-- 数学 -->
+
+        <a
+            class="duel"
+            href="https://script.google.com/macros/s/AKfycbwQb2e9mH3OrgDt1Jmjgxhm7DmxXUClpsrVt5_fCF9UyDTl-KSomZqMU1up1bCiaKcL-w/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="duel-icon">
+                ∑
+            </div>
+
+            <div class="duel-title">
+                五年级数学双人比拼
+            </div>
+
+            <div class="duel-en">
+                MATHEMATICS DUEL
+            </div>
+
+            <div class="duel-desc">
+                与同学进行数学知识
+                1 VS 1 对战。
+            </div>
+
+            <div class="duel-arrow">
+                →
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===================================
+     CHALLENGE
+=================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-icon">
+            🔥
+        </div>
+
+        <div class="section-title">
+
+            学习挑战
+
+            <span>
+                SPECIAL CHALLENGE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <a
+        class="challenge"
+        href="https://script.google.com/macros/s/AKfycbyJkWCYn2rMAQq3MbG4Q6kCjKsuCmqoTSqmtD9R69C431EUUNu5Oq3V6cEL_DD1xWpz/exec"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        <div class="challenge-left">
+
+            <div class="challenge-icon">
+                🔥
+            </div>
+
+            <div>
+
+                <div class="challenge-title">
+                    五年级成语大挑战
+                </div>
+
+                <div class="challenge-desc">
+
+                    挑战你的成语知识！
+
+                    <br>
+
+                    看看你能闯过多少关。
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="challenge-button">
+            开始挑战 →
+        </div>
+
+    </a>
+
+</section>
+
+
+
+<!-- ===================================
+     FOOTER
+=================================== -->
+
+<footer>
+
+    <div class="footer-title">
+        5C · DIGITAL LEARNING HUB
+    </div>
+
+    班达马兰国民型华小B校
+
+    <br>
+
+    线上班级学习平台 · 2026
+
+</footer>
+
+
+</div>
+
+</body>
+</html>
